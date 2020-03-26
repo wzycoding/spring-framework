@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="welcomeService" class="com.imooc.service.impl.WelcomeServiceImpl"/>
+
+	<!-- 1、使用类无参构造函数创建 -->
+	<bean id="user1" class="com.imooc.entity.User" scope="singleton" lazy-init="true" primary="true"/>
+
+	<!-- 2、使用静态工厂的方式进行创建-->
+	<bean id="user2" class="com.imooc.entity.factory.StaticFactory" scope="singleton" factory-method="getUser"/>
+	<!--3、使用实例工厂进行创建 -->
+	<bean id="userFactory" class="com.imooc.entity.factory.UserFactory"/>
+	<bean id="user3" factory-bean="userFactory" factory-method="getUser" scope="singleton"/>
+
+    <!-- 使用factoryBean -->
+	<bean id="user4" class="com.imooc.entity.factory.UserFactoryBean"/>
+</beans>
